@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class Finder {
 
-    private static final String INVALID_UUID_MESSAGE = "Неверный UUID.";
+    private static final String INVALID_UUID_MESSAGE = "Неверный UUID";
     private static final String NO_ENTRIES = "Нет записей с таким именем";
 
     private final Map<UUID, Entry> entries;
