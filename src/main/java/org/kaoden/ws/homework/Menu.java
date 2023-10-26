@@ -1,12 +1,8 @@
 package org.kaoden.ws.homework;
 
-import org.kaoden.ws.homework.obj.Entry;
 import org.kaoden.ws.homework.service.Finder;
-import org.kaoden.ws.homework.service.Reader;
 
-import java.util.Map;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Menu {
 
@@ -18,21 +14,26 @@ public class Menu {
             """;
     private static final String INVALID_MODE_MESSAGE = "Неверный режим поиска.";
 
+    private static final String UUID_ENTRY_MESSAGE = "Введите UUID записи: ";
+    private static final String NAME_ENTRY_MESSAGE = "Введите название записи: ";
+
     private static final int FIND_BY_UUID = 1;
     private static final int FIND_BY_NAME = 2;
     private static final int EXIT_MODE = 3;
 
     private final Scanner scanner = new Scanner(System.in);
+    private final Finder entryFinder;
 
-    public void selectSearchMode(String filePath) {
-        Map<UUID, Entry> entries = getEntries(filePath);
-        Finder finder = new Finder(entries);
+    public Menu(Finder entryFinder) {
+        this.entryFinder = entryFinder;
+    }
 
+    public void selectSearchMode() {
         int mode = setMode();
         while (mode != EXIT_MODE) {
             switch (mode) {
-                case FIND_BY_UUID -> finder.findByUUID();
-                case FIND_BY_NAME -> finder.findByName();
+                case FIND_BY_UUID -> findEntryByUUID();
+                case FIND_BY_NAME -> findEntryByName();
                 default -> System.out.println(INVALID_MODE_MESSAGE);
             }
             System.out.println();
@@ -42,11 +43,16 @@ public class Menu {
 
     private int setMode() {
         System.out.print(MODE_OPTIONS);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    private Map<UUID, Entry> getEntries(String filePath) {
-        Reader reader = new Reader();
-        return reader.readEntriesFromJson(filePath);
+    private void findEntryByUUID() {
+        System.out.print(UUID_ENTRY_MESSAGE);
+        entryFinder.findByUUID(scanner.nextLine());
+    }
+
+    private void findEntryByName() {
+        System.out.print(NAME_ENTRY_MESSAGE);
+        entryFinder.findByName(scanner.nextLine());
     }
 }
