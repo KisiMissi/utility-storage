@@ -4,7 +4,6 @@ import org.kaoden.ws.homework.obj.Entry;
 import org.kaoden.ws.homework.service.Finder;
 import org.kaoden.ws.homework.service.Reader;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
@@ -48,12 +47,6 @@ public class Menu {
 
     private Map<UUID, Entry> getEntries(String filePath) {
         Reader reader = new Reader();
-        Map<UUID, Entry> entries;
-        try {
-            entries = reader.readEntriesFromJson(filePath);
-        } catch (IOException ioe) {
-            throw new RuntimeException("An error occurred while reading file: " +filePath);
-        }
-        return entries;
+        return reader.readEntriesFromJson(filePath);
     }
 }

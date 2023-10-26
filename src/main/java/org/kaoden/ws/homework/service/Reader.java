@@ -12,8 +12,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Reader {
-    public Map<UUID, Entry> readEntriesFromJson(String filePath)
-            throws IOException {
+
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    public Map<UUID, Entry> readEntriesFromJson(String filePath) {
         List<Entry> entryList = readEntriesAsList(getFile(filePath));
         return convertListToMap(entryList);
     }
@@ -26,10 +28,12 @@ public class Reader {
             throw new RuntimeException("File with this location \"" +filePath+ "\" doesn't exist");
     }
 
-    private List<Entry> readEntriesAsList(File file)
-            throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(file, new TypeReference<>() {});
+    private List<Entry> readEntriesAsList(File file) {
+        try {
+            return mapper.readValue(file, new TypeReference<>() {});
+        } catch (IOException ioe) {
+            throw new RuntimeException("An error occurred while reading file: " + file.toString());
+        }
     }
 
     private Map<UUID, Entry> convertListToMap(List<Entry> entryList) {
