@@ -1,0 +1,32 @@
+[
+  {
+    "uuid": "1a92d32f-8273-4c48-b5e1-3e0b762a7c11",
+    "name": "Полезный материал 1",
+    "description": "Описание полезного материала 1",
+    "link": "https://example.com/material1"
+  },
+  {
+    "uuid": "bd1b34fc-5397-4c11-a24a-8e75f04536a2",
+    "name": "Полезный материал 2",
+    "description": "Описание полезного материала 2",
+    "link": "https://example.com/material2"
+  },
+  {
+    "uuid": "ef2b2dd9-52e7-4f63-a803-9b5c8ca56d9d",
+    "name": "Полезный материал 3",
+    "description": "Описание полезного материала 3",
+    "link": "https://example.com/material3"
+  },
+  {
+    "uuid": "c4a0c3f9-7db5-4d16-96b4-0eefb8f7fbdf",
+    "name": "Полезный материал 4",
+    "description": "Описание полезного материала 4",
+    "link": "https://example.com/material4"
+  },
+  {
+    "uuid": "2f05d0ca-5f5d-434e-a2e6-92e4a2f856c6",
+    "name": "Полезный материал 5",
+    "description": "Описание полезного материала 5",
+    "link": "https://example.com/material5"
+  }
+]
