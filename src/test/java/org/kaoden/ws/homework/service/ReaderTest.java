@@ -60,28 +60,6 @@ class ReaderTest {
         Map<UUID, Entry> actualEntries = reader.readEntriesFromJson(filePath);
 
         // Arrange
-        assertAll(
-                () -> assertNull(actualEntries.get(null).getUuid()),
-                () -> assertNull(actualEntries.get(null).getName()),
-                () -> assertEquals("Описание полезного материала", actualEntries.get(null).getDescription()),
-                () -> assertEquals("https://example.com/material", actualEntries.get(null).getLink())
-        );
-    }
-
-    @Test
-    void readEntryWithoutAllFields() {
-        // Arrange
-        String filePath = "src\\test\\resources\\dataWithEntryWithoutAllFields.json";
-
-        // Act
-        Map<UUID, Entry> actualEntries = reader.readEntriesFromJson(filePath);
-
-        // Assert
-        assertAll(
-                () -> assertNull(actualEntries.get(null).getUuid()),
-                () -> assertNull(actualEntries.get(null).getName()),
-                () -> assertNull(actualEntries.get(null).getDescription()),
-                () -> assertNull(actualEntries.get(null).getLink())
-        );
+        assertTrue(actualEntries.isEmpty());
     }
 }

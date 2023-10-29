@@ -38,7 +38,9 @@ public class Reader {
 
     private Map<UUID, Entry> convertListToMap(List<Entry> entryList) {
         Map<UUID, Entry> entries = new HashMap<>();
-        entryList.forEach(entry -> entries.put(entry.getUuid(), entry));
+        entryList.stream()
+                .filter(entry -> entry.getUuid() != null & entry.getName() != null)
+                .forEach(entry -> entries.put(entry.getUuid(), entry));
         return entries;
     }
 }
