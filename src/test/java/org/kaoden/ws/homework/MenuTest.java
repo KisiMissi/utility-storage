@@ -24,15 +24,20 @@ class MenuTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    void provideInput(String data) {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(data.getBytes());
+    void provideInput(String[] strings) {
+        StringBuilder data = new StringBuilder();
+        for (String line : strings) {
+            data.append(line);
+            data.append(System.lineSeparator());
+        }
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(data.toString().getBytes());
         System.setIn(inputStream);
     }
 
     @Test
     void findByUUID() {
         // Arrange
-        String modeAndUUID = "1" + System.lineSeparator() + "1a92d32f-8273-4c48-b5e1-3e0b762a7c11" + System.lineSeparator() + "3";
+        String[] modeAndUUID = {"1", "1a92d32f-8273-4c48-b5e1-3e0b762a7c11", "3"};
         provideInput(modeAndUUID);
 
         // Act
@@ -45,7 +50,7 @@ class MenuTest {
     @Test
     void findByName() {
         // Arrange
-        String modeAndUUID = "2" + System.lineSeparator() + "SOME-NAME" + System.lineSeparator() + "3";
+        String[] modeAndUUID = {"2", "SOME-NAME", "3"};
         provideInput(modeAndUUID);
 
         // Act
@@ -58,7 +63,7 @@ class MenuTest {
     @Test
     void invalidSearchModeNumber() {
         // Arrange
-        String mode = "100\n3";
+        String[] mode = {"100", "3"};
         provideInput(mode);
         ByteArrayOutputStream outStreamCap = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outStreamCap));
@@ -73,7 +78,7 @@ class MenuTest {
     @Test
     void invalidSearchModeType() {
         // Arrange
-        String invalidMode = "MODE\n3";
+        String[] invalidMode = {"MODE", "3"};
         provideInput(invalidMode);
 
         // Act
