@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.UUID;
 
 import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +39,7 @@ class MenuTest {
         new Menu(finder).selectSearchMode();
 
         // Assert
-        verify(finder).findByUUID("1a92d32f-8273-4c48-b5e1-3e0b762a7c11");
+        verify(finder).findByUUID(UUID.fromString("1a92d32f-8273-4c48-b5e1-3e0b762a7c11"));
     }
 
     @Test

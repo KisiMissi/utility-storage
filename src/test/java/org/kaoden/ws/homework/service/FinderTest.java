@@ -41,16 +41,16 @@ class FinderTest {
     }
 
     @Test
-    void findByInvalidUUID() {
+    void findByValidNonexistentUUID() {
         // Arrange
-        String testUUID = "1a92d32f-8273";
+        UUID testUUID = UUID.fromString("1a92d32f-8273-4c48-1b32-3e0b762a7c11");
 
         // Act
         new Finder(entries).findByUUID(testUUID);
 
         // Assert
         assertEquals(
-                "Неверный UUID",
+                "There is no entry with that 1a92d32f-8273-4c48-1b32-3e0b762a7c11 UUID",
                 outStreamCaptor.toString().trim()
         );
     }
@@ -58,7 +58,7 @@ class FinderTest {
     @Test
     void findByValidUUID() {
         // Arrange
-        String testUUID = "1a92d32f-8273-4c48-b5e1-3e0b762a7c11";
+        UUID testUUID = UUID.fromString("1a92d32f-8273-4c48-b5e1-3e0b762a7c11");
         String expectedOutput = "Entry: uuid=1a92d32f-8273-4c48-b5e1-3e0b762a7c11, name='Тестовый материал 1', description='null', link='null";
 
         // Act
